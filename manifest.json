@@ -1,0 +1,20 @@
+{
+    "name": "Aphrodite CSS generator",
+    "id": "1483242704325646453",
+    "api": "1.0.0",
+    "main": "dist/code.js",
+    "capabilities": ["codegen"],
+    "enableProposedApi": false,
+    "documentAccess": "dynamic-page",
+    "editorType": ["dev"],
+    "ui": "ui.html",
+    "codegenLanguages": [
+        {
+            "label": "Language Label",
+            "value": "language-value"
+        }
+    ],
+    "networkAccess": {
+        "allowedDomains": ["none"]
+    }
+}
