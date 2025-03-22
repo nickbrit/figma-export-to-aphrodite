@@ -7,7 +7,7 @@ if (figma.editorType === "dev" && figma.mode === "codegen") {
     figma.codegen.on("generate", ({ node }: { node: SceneNode }) => {
         let cssString = "";
 
-        if (["FRAME", "COMPONENT"].includes(node.type)) {
+        if (["FRAME", "COMPONENT", "INSTANCE"].includes(node.type)) {
             const displayStyles = getFlexboxStyles(node);
             Object.entries(displayStyles).forEach(([property, value]) => {
                 cssString += `${property}: ${value}; `;
@@ -21,7 +21,11 @@ if (figma.editorType === "dev" && figma.mode === "codegen") {
             });
         }
 
-        if (["RECTANGLE", "ELLIPSE", "POLYGON", "STAR"].includes(node.type)) {
+        if (
+            ["RECTANGLE", "ELLIPSE", "POLYGON", "STAR", "INSTANCE"].includes(
+                node.type
+            )
+        ) {
             const shapeStyles = getShapeStyles(node);
             Object.entries(shapeStyles).forEach(([property, value]) => {
                 cssString += `${property}: ${value}; `;

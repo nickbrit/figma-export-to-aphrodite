@@ -6,12 +6,13 @@ export function getTextStyles(node: SceneNode): Record<string, string> {
     if (node.type !== "TEXT") return styles;
 
     if (
-        "fills" in node &&
-        Array.isArray(node.fills) &&
-        node.fills.length > 0 &&
-        node.fills[0].type === "SOLID"
+        "fontName" in node &&
+        typeof node.fontName === "object" &&
+        "style" in node.fontName
     ) {
-        styles.color = rgbToHex(node.fills[0].color);
+        styles.fontStyle = node.fontName.style.toLowerCase().includes("italic")
+            ? "italic"
+            : "normal";
     }
     if (
         "fontName" in node &&
@@ -24,20 +25,21 @@ export function getTextStyles(node: SceneNode): Record<string, string> {
         styles.fontSize = `${node.fontSize}px`;
     if ("fontWeight" in node) styles.fontWeight = String(node.fontWeight);
     if (
-        "fontName" in node &&
-        typeof node.fontName === "object" &&
-        "style" in node.fontName
-    ) {
-        styles.fontStyle = node.fontName.style.toLowerCase().includes("italic")
-            ? "italic"
-            : "normal";
-    }
-    if (
         "lineHeight" in node &&
         typeof node.lineHeight === "object" &&
         "value" in node.lineHeight
     ) {
-        styles.lineHeight = `${node.lineHeight.value}px`;
+        styles.lineHeight = `${parseFloat(
+            node.lineHeight.value.toFixed(2)
+        ).toString()}%`;
+    }
+    if (
+        "fills" in node &&
+        Array.isArray(node.fills) &&
+        node.fills.length > 0 &&
+        node.fills[0].type === "SOLID"
+    ) {
+        styles.color = rgbToHex(node.fills[0].color);
     }
 
     return styles;

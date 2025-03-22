@@ -1,6 +1,6 @@
 {
     "name": "Aphrodite CSS generator",
-    "id": "1483242704325646453",
+    "id": "1484009431029333393",
     "api": "1.0.0",
     "main": "dist/code.js",
     "capabilities": ["codegen"],
@@ -10,8 +10,8 @@
     "ui": "ui.html",
     "codegenLanguages": [
         {
-            "label": "Language Label",
-            "value": "language-value"
+            "label": "Aphrodite (CSS-in-JS)",
+            "value": "aphrodite-css"
         }
     ],
     "networkAccess": {
