@@ -2,6 +2,7 @@ import { convertCSSToAphrodite } from "./utils/css";
 import { getTextStyles } from "./styles/textStyles";
 import { getShapeStyles } from "./styles/shapeStyles";
 import { getFlexboxStyles } from "./styles/displayStyles";
+import { getPadddingStyles } from "./styles/padddingStyles";
 
 if (figma.editorType === "dev" && figma.mode === "codegen") {
     figma.codegen.on("generate", ({ node }: { node: SceneNode }) => {
@@ -10,6 +11,17 @@ if (figma.editorType === "dev" && figma.mode === "codegen") {
         if (["FRAME", "COMPONENT", "INSTANCE"].includes(node.type)) {
             const displayStyles = getFlexboxStyles(node);
             Object.entries(displayStyles).forEach(([property, value]) => {
+                cssString += `${property}: ${value}; `;
+            });
+        }
+
+        if (
+            ["FRAME", "COMPONENT", "COMPONENT_SET", "INSTANCE"].includes(
+                node.type
+            )
+        ) {
+            const paddingStyles = getPadddingStyles(node);
+            Object.entries(paddingStyles).forEach(([property, value]) => {
                 cssString += `${property}: ${value}; `;
             });
         }
