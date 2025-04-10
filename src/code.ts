@@ -34,9 +34,14 @@ if (figma.editorType === "dev" && figma.mode === "codegen") {
         }
 
         if (
-            ["RECTANGLE", "ELLIPSE", "POLYGON", "STAR", "INSTANCE"].includes(
-                node.type
-            )
+            [
+                "RECTANGLE",
+                "ELLIPSE",
+                "POLYGON",
+                "STAR",
+                "INSTANCE",
+                "FRAME",
+            ].includes(node.type)
         ) {
             const shapeStyles = getShapeStyles(node);
             Object.entries(shapeStyles).forEach(([property, value]) => {
